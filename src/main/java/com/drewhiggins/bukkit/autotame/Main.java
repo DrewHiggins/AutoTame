@@ -25,7 +25,11 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         try {
+            saveDefaultConfig();
             getServer().getPluginManager().registerEvents(new WolfSpawnListener(this), this);
+            if (this.getConfig().getBoolean("killWolvesOnDeath")) {
+                getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
+            }
             getLogger().info("AutoTame successfully enabled.");
         } catch (Exception e) {
             e.printStackTrace();
