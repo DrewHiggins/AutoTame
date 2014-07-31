@@ -35,14 +35,16 @@ public class Main extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("collar")) {
             if (sender instanceof Player && args.length == 1) {
-                Wolf closestOwnedWolf = getNearestOwnedWolf((Player)sender);
+                Player playerSender = (Player)sender;
+                Wolf closestOwnedWolf = getNearestOwnedWolf(playerSender);
                 DyeColor selectedDyeColor;
-                if (args[0].trim() == "random") {
+                if (args[0].trim().equalsIgnoreCase("random")) {
                     selectedDyeColor = getRandomDyeColor();
                 } else {
-                    selectedDyeColor = getDyeColorFromString(args[0], (Player)sender, closestOwnedWolf.getCollarColor());
+                    selectedDyeColor = getDyeColorFromString(args[0], playerSender, closestOwnedWolf.getCollarColor());
                 }
                 closestOwnedWolf.setCollarColor(selectedDyeColor);
+                getLogger().info(playerSender.toString() + " changed a wolf's collar color to " + selectedDyeColor.toString());
                 return true;
             }
             return false;   
