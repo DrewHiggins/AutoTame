@@ -1,6 +1,6 @@
 name: AutoTame
 main: com.drewhiggins.bukkit.autotame.Main
-version: 0.0.1
+version: 1.0
 
 commands:
     collar:

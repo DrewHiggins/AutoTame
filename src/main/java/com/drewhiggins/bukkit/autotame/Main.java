@@ -1,3 +1,9 @@
+/**
+ * @author Drew Higgins (www.drewhiggins.com)
+ * 
+ * Licensed under the MIT License
+ */
+
 package com.drewhiggins.bukkit.autotame;
 
 import java.util.ArrayList;
