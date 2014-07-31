@@ -81,6 +81,18 @@ public class Main extends JavaPlugin {
         else if (c.equalsIgnoreCase("magenta")) {
             return DyeColor.MAGENTA;
         }
+        else if (c.equalsIgnoreCase("light_blue")) {
+            return DyeColor.LIGHT_BLUE;
+        }
+        else if (c.equalsIgnoreCase("yellow")) {
+            return DyeColor.YELLOW;
+        }
+        else if (c.equalsIgnoreCase("lime")) {
+            return DyeColor.LIME;
+        }
+        else if (c.equalsIgnoreCase("pink")) {
+            return DyeColor.PINK;
+        }
         else {
             commander.sendMessage("Requested color not found!");
             return DyeColor.RED;
