@@ -23,7 +23,8 @@ public class PlayerDeathListener implements Listener {
     
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        List<Wolf> ownedWolves = getOwnedWolves((Player)event.getEntity());
+        plugin.getServer().getLogger().info(event.getEntity().getName() + " died. Killing all owned wolves.");
+        List<Wolf> ownedWolves = getOwnedWolves((Player)(event.getEntity()));
         for (Wolf w : ownedWolves) {
             w.setHealth(0);
         }
@@ -35,15 +36,17 @@ public class PlayerDeathListener implements Listener {
         for (World w : worlds) {
             List<Entity> allEntities = w.getEntities();
             for (Entity e : allEntities) {
-                if (e.getType().equals(EntityType.WOLF)) {
+                if (e.getType() == EntityType.WOLF) {
                     allWolves.add((Wolf)e);
                 }
             }
         }
         List<Wolf> ownedWolves = new ArrayList<Wolf>();
         for (Wolf w : allWolves) {
-            if (w.getOwner().equals((AnimalTamer)player)) {
-                ownedWolves.add(w);
+            if (w.isTamed()) {
+                if (w.getOwner() == (AnimalTamer)player) {
+                    ownedWolves.add(w);
+                }
             }
         }
         return ownedWolves;

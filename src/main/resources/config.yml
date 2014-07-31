@@ -1,2 +1,2 @@
-# if true, all a players owned wolves will die when the player dies
-killWolvesOnDeath: true;
+# if true, all a players owned wolves will die when the player dies (default: true)
+killWolvesOnDeath: true

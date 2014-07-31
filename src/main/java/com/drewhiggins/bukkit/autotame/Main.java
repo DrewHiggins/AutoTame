@@ -25,12 +25,12 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         try {
-            saveDefaultConfig();
+            this.saveDefaultConfig();
             getServer().getPluginManager().registerEvents(new WolfSpawnListener(this), this);
-            if (this.getConfig().getBoolean("killWolvesOnDeath")) {
+            if (getConfig().getBoolean("killWolvesOnDeath")) {
                 getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
             }
-            getLogger().info("AutoTame successfully enabled.");
+            getLogger().info("AutoTame successfully enabled. Kill wolves on death set to \"" + getConfig().getBoolean("killWolvesOnDeath") + "\"");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class Main extends JavaPlugin {
                     selectedDyeColor = getDyeColorFromString(args[0], playerSender, closestOwnedWolf.getCollarColor());
                 }
                 closestOwnedWolf.setCollarColor(selectedDyeColor);
-                getLogger().info(playerSender.toString() + " changed a wolf's collar color to " + selectedDyeColor.toString());
+                getLogger().info(playerSender.getName() + " changed one of his wolves' collar color to " + selectedDyeColor.name() + ".");
                 return true;
             }
             return false;   
@@ -121,7 +121,7 @@ public class Main extends JavaPlugin {
         else if (c.equalsIgnoreCase("cyan")) {
             return DyeColor.CYAN;
         }
-        else if (c.equalsIgnoreCase("pruple")) {
+        else if (c.equalsIgnoreCase("purple")) {
             return DyeColor.PURPLE;
         }
         else if (c.equalsIgnoreCase("brown")) {

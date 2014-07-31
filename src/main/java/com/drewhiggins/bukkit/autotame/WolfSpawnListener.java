@@ -25,7 +25,7 @@ public class WolfSpawnListener implements Listener {
             Wolf spawnedWolf = (Wolf)event.getEntity();
             spawnedWolf.setTamed(true);
             spawnedWolf.setOwner(spawner);
-            plugin.getServer().getLogger().info("[AutoTame] A wolf spawn egg was used. Set owner as " + spawner.getDisplayName() + ".");
+            plugin.getServer().getLogger().info("[AutoTame] A wolf spawn egg was used. Set owner as " + spawner.getName() + ".");
         }
     }
     
