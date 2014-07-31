@@ -2,6 +2,7 @@ package com.drewhiggins.bukkit.autotame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
@@ -34,8 +35,13 @@ public class Main extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("collar")) {
             if (sender instanceof Player && args.length == 1) {
-                DyeColor selectedDyeColor = getDyeColorFromString(args[0], (Player)sender);
                 Wolf closestOwnedWolf = getNearestOwnedWolf((Player)sender);
+                DyeColor selectedDyeColor;
+                if (args[0].trim() == "random") {
+                    selectedDyeColor = getRandomDyeColor();
+                } else {
+                    selectedDyeColor = getDyeColorFromString(args[0], (Player)sender, closestOwnedWolf.getCollarColor());
+                }
                 closestOwnedWolf.setCollarColor(selectedDyeColor);
                 return true;
             }
@@ -68,7 +74,8 @@ public class Main extends JavaPlugin {
         return closestWolf;
     }
     
-    public DyeColor getDyeColorFromString(String c, Player commander) {
+    // converts a string color to a DyeColor enum, or leaves the color unchanged if not found
+    public DyeColor getDyeColorFromString(String c, Player commander, DyeColor currentColor) {
         if (c.equalsIgnoreCase("red")) {
             return DyeColor.RED;
         }
@@ -93,9 +100,37 @@ public class Main extends JavaPlugin {
         else if (c.equalsIgnoreCase("pink")) {
             return DyeColor.PINK;
         }
+        else if (c.equalsIgnoreCase("gray")) {
+            return DyeColor.GRAY;
+        }
+        else if (c.equalsIgnoreCase("silver")) {
+            return DyeColor.SILVER;
+        }
+        else if (c.equalsIgnoreCase("cyan")) {
+            return DyeColor.CYAN;
+        }
+        else if (c.equalsIgnoreCase("pruple")) {
+            return DyeColor.PURPLE;
+        }
+        else if (c.equalsIgnoreCase("brown")) {
+            return DyeColor.BROWN;
+        }
+        else if (c.equalsIgnoreCase("green")) {
+            return DyeColor.GREEN;
+        }
+        else if (c.equalsIgnoreCase("black")) {
+            return DyeColor.BLACK;
+        }
         else {
             commander.sendMessage("Requested color not found!");
-            return DyeColor.RED;
+            return currentColor;
         }
+    }
+    
+    public DyeColor getRandomDyeColor() {
+        DyeColor[] possibleColors = DyeColor.class.getEnumConstants();
+        Random random = new Random();
+        int randIndex = random.nextInt(possibleColors.length);
+        return possibleColors[randIndex];
     }
 }
