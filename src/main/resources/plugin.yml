@@ -1,0 +1,10 @@
+name: AutoTame
+main: com.drewhiggins.bukkit.autotame.Main
+version: 0.0.1
+
+commands:
+    collar:
+        description: Sets nearby wolves' collar color
+        usage: /collar <color>
+        permission: autotame.collar
+        permission-message: You don't have permission!
